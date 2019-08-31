@@ -1,0 +1,32 @@
+.h-100{
+    font-size: 30vh;
+}
+.h-50{
+    height: 50vh;
+}
+.redondo{    
+    border: 2px solid#d9534f;
+    border-radius: 50%;
+    width: 100%;
+}
+.w-100{
+    width: 100% !important;
+}
+.hola{
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+.header{
+    height: 7vh;
+    width: 100%;
+    background-color: rgba($color: #d9534f, $alpha: 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.mapa{
+    font-size: 5vh;
+    margin-right: 10px;
+    color: 	#d9534f;
+}

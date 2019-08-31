@@ -1,0 +1,7 @@
+{
+  "name": "Retenes",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
