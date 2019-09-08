@@ -1,11 +1,12 @@
 .h-100{
     font-size: 30vh;
+    color: #428bca;
 }
 .h-50{
     height: 50vh;
 }
 .redondo{    
-    border: 2px solid#d9534f;
+    border: 2px solid #428bca;
     border-radius: 50%;
     width: 100%;
 }
@@ -20,7 +21,7 @@
 .header{
     height: 7vh;
     width: 100%;
-    background-color: rgba($color: #d9534f, $alpha: 0.2);
+    background-color: rgba($color: #428bca, $alpha: 0.2);
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -28,5 +29,5 @@
 .mapa{
     font-size: 5vh;
     margin-right: 10px;
-    color: 	#d9534f;
+    color: 	#428bca;
 }
