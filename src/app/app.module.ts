@@ -12,6 +12,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { environment } from '../environments/environment';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestore } from 'angularfire2/firestore';
+import { Network } from '@ionic-native/network/ngx';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -21,6 +22,7 @@ import { AngularFirestore } from 'angularfire2/firestore';
     SplashScreen,
     Geolocation,
     AngularFirestore,
+    Network,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

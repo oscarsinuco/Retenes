@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { FirestoreService } from '../services/firestore/firestore.service';
+import { Network } from '@ionic-native/network/ngx';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -9,7 +10,8 @@ import { FirestoreService } from '../services/firestore/firestore.service';
 })
 export class HomePage {
   public data: any;
-  constructor(public alertController: AlertController, private geolocation: Geolocation, private firestoreService: FirestoreService) {}
+  // tslint:disable-next-line: max-line-length
+  constructor(private network: Network, public alertController: AlertController, private geolocation: Geolocation, private firestoreService: FirestoreService) {}
   async presentAlert() {
     const alert = await this.alertController.create({
       header: 'Exitoso',
@@ -36,11 +38,9 @@ export class HomePage {
       };
       if (this.firestoreService.pushPosition(this.data)) {
         await alert.present();
-      } else {
-        console.log('Mal');
       }
-     }).catch((error) => {
-       console.log('Error getting location', error);
+     }).catch(async (error) => {
+      await bad_alert.present();
      });
   }
 }

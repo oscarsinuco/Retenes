@@ -19,7 +19,8 @@ export class MapaPage implements OnInit {
         container: 'map',
         style: this.style,
         zoom: 12,
-        center: [this.lng, this.lat]
+        center: [this.lng, this.lat],
+        attributionControl: false
     });
     // Add map controls
     this.map.addControl(new mapboxgl.NavigationControl());
