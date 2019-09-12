@@ -3,6 +3,7 @@ import { AlertController } from '@ionic/angular';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { FirestoreService } from '../services/firestore/firestore.service';
 import { Network } from '@ionic-native/network/ngx';
+import { Platform } from '@ionic/angular';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -11,7 +12,7 @@ import { Network } from '@ionic-native/network/ngx';
 export class HomePage {
   public data: any;
   // tslint:disable-next-line: max-line-length
-  constructor(private network: Network, public alertController: AlertController, private geolocation: Geolocation, private firestoreService: FirestoreService) {}
+  constructor(private platform: Platform,private network: Network, public alertController: AlertController, private geolocation: Geolocation, private firestoreService: FirestoreService) {}
   async presentAlert() {
     const alert = await this.alertController.create({
       header: 'Exitoso',
@@ -29,18 +30,23 @@ export class HomePage {
     });
     let lat: any;
     let lon: any;
-    this.geolocation.getCurrentPosition().then(async (resp) => {
-      lat = resp.coords.latitude;
-      lon = resp.coords.longitude;
-      this.data = {
-        latitud: lat,
-        longitud: lon
-      };
-      if (this.firestoreService.pushPosition(this.data)) {
-        await alert.present();
+    this.platform.ready().then(()=>{
+      var options = {
+        timeout: 20000
       }
-     }).catch(async (error) => {
-      await bad_alert.present();
-     });
+      this.geolocation.getCurrentPosition().then(async (resp) => {
+        lat = resp.coords.latitude;
+        lon = resp.coords.longitude;
+        this.data = {
+          latitud: lat,
+          longitud: lon
+        };
+        if (this.firestoreService.pushPosition(this.data)) {
+          await alert.present();
+        }
+      }).catch(async (error) => {
+        await bad_alert.present();
+      });
+    });
   }
 }
