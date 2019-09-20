@@ -4,6 +4,8 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { FirestoreService } from '../services/firestore/firestore.service';
 import { Network } from '@ionic-native/network/ngx';
 import { Platform } from '@ionic/angular';
+import { Observable } from 'rxjs';
+import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -11,8 +13,16 @@ import { Platform } from '@ionic/angular';
 })
 export class HomePage {
   public data: any;
+  item: Observable<any[]>;
   // tslint:disable-next-line: max-line-length
-  constructor(private platform: Platform,private network: Network, public alertController: AlertController, private geolocation: Geolocation, private firestoreService: FirestoreService) {}
+  constructor(db: AngularFirestore, private platform: Platform,private network: Network, public alertController: AlertController, private geolocation: Geolocation, private firestoreService: FirestoreService) {
+    this.item = db.collection("root").snapshotChanges();
+    this.item.subscribe((datos)=>{
+      datos.forEach((dato)=>{
+        console.log(dato.payload.doc.data());
+      });
+    });
+  }
   async presentAlert() {
     const alert = await this.alertController.create({
       header: 'Exitoso',
